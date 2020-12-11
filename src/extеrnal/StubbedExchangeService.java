@@ -1,4 +1,4 @@
-package exturnal;
+package extеrnal;
 
 import domain.entity.Money;
 import domain.external.ExchangeService;

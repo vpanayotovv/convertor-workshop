@@ -16,8 +16,13 @@ public class ConvertCommand implements Command<ConvertCommand.Input> {
 
     @Override
     public void execute(Input input) {
-       Money converted = exchangeService.exchange(input.convertFrom,input.toCurrency);
-       logger.logLine(converted.toString());
+       this.protectedExecute(input);
+    }
+
+    protected Money protectedExecute(Input input){
+        Money converted = exchangeService.exchange(input.convertFrom,input.toCurrency);
+        logger.logLine(converted.toString());
+        return converted;
     }
 
     public static class Input extends EmptyInput{
