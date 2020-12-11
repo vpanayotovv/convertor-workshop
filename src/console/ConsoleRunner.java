@@ -4,11 +4,17 @@ import domain.command.ConvertCommand;
 import domain.command.EmptyInput;
 import domain.command.EndCommand;
 import domain.entity.Money;
+import domain.external.ExchangeService;
+import domain.io.Logger;
+import exturnal.StubbedExchangeService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+
+    private static ExchangeService exchangeService = new StubbedExchangeService();
+    private static Logger logger = new ConsoleLogger();
 
     public void run(){
         Scanner scanner = new Scanner(System.in);
@@ -25,7 +31,7 @@ public class ConsoleRunner {
                     convert(split);
                     break;
                 default:
-                    System.out.println("incorrect command");
+                    logger.logLine("incorrect command");
                     break;
             }
 
@@ -42,7 +48,7 @@ public class ConsoleRunner {
                 new Money(fromValue,fromCurrency),toCurrency
         );
 
-        new ConvertCommand().execute(input);
+        new ConvertCommand(exchangeService,logger).execute(input);
     }
 
     private void end() {
