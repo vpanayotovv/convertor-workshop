@@ -3,7 +3,7 @@ package console;
 import domain.external.ExchangeService;
 import domain.io.Logger;
 import domain.repository.ConversionHistoryRepository;
-import extеrnal.StubbedExchangeService;
+import extеrnal.CurrConvExchangeService;
 import extеrnal.repository.InMemoryRepository;
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class ConsoleRunner {
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
-        ExchangeService exchangeService = new StubbedExchangeService();
+        ExchangeService exchangeService = new CurrConvExchangeService();
         Logger logger = new ConsoleLogger();
         ConversionHistoryRepository conversionHistoryRepository = new InMemoryRepository();
 
